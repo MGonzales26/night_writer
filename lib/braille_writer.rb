@@ -38,16 +38,34 @@ class BrailleWriter
     }
   end
 
-  # def translate(letter)
-  #   @braille_alphabet[letter]
-  # end
-
-  def translate_text(text)
-    braille_text = text.chars.map do |letter|
+  def translate(text)
+    text.chars.map do |letter|
       @braille_alphabet[letter]
     end
-    braille_text.each do |letter|
-      letter
+  end
+
+  def translate_text(text)
+    braille_text = translate(text)
+    hold = braille_text.each_slice(40).to_a
+    collector = []
+    hold2 = hold.each do |row|
+      top_line = ""
+      middle_line = ""
+      bottom_line = ""
+      row.map do |letter|
+        top_line += letter[0]
+        middle_line += letter[1]
+        bottom_line += letter[2]
+      end
+      collector << top_line + "\n" + middle_line + "\n" + bottom_line
     end
+    # require 'pry'; binding.pry
+    string = ""
+    collector.each do |row|
+      string += "#{row}\n"
+    end
+    # "#{hold2[0]}\n#{hold2[0]}\n#{hold2[0]}\n"
+# require 'pry'; binding.pry
+    string
   end
 end

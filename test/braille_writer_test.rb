@@ -56,6 +56,10 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_braille_letters_on_same_row
+    text = "at"
 
+    expected = "0..0\n..00\n..0."
+require 'pry'; binding.pry
+    assert_equal expected, @document.translate_text(text)
   end
 end
