@@ -17,40 +17,35 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    skip
     expected = "This is a test sentence.\nThis is also a test sentence."
 
     assert_equal expected, @document.text
   end
   
   def test_braille_letter_a
-    skip
-    expected = "0.\n..\n.."
+    expected = ["0.", "..", ".."]
 
     assert_equal expected, @document.braille_alphabet["a"]
   end
 
-  def test_it_can_translate_a_letter
-    skip
-    expected = "0.\n..\n.."
+  def test_it_can_translate
+    expected = ["0.", "..", ".."]
 
     assert_equal = @document.translate("a")
   end
 
   def test_it_can_translate_text_small
-    skip
     text = "at"
 
-    expected = "0.\n..\n.."".0\n00\n0."
+    expected = "0..0\n..00\n..0.\n"
 
     assert_equal expected, @document.translate_text(text)
   end
 
   def test_it_can_translate_text_large
-    skip
     text = "hello world"
 
-    expected = "0.\n00\n..""0.\n.0\n..""0.\n0.\n0.""0.\n0.\n0.""0.\n.0\n0.""..\n..\n.."".0\n00\n.0""0.\n.0\n0.""0.\n00\n0.""0.\n0.\n0.""00\n.0\n.."
+    expected = "0.0.0.0.0....00.0.0.00\n00.00.0..0..00.0000..0\n....0.0.0....00.0.0...\n"
 
     assert_equal expected, @document.translate_text(text)
   end
@@ -58,8 +53,8 @@ class BrailleWriterTest < Minitest::Test
   def test_braille_letters_on_same_row
     text = "at"
 
-    expected = "0..0\n..00\n..0."
-require 'pry'; binding.pry
+    expected = "0..0\n..00\n..0.\n"
+
     assert_equal expected, @document.translate_text(text)
   end
 end
