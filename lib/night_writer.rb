@@ -2,6 +2,8 @@ file = File.open(ARGV[0], "r")
 
 incoming_text = file.read
 
+document = BrailleWriter.new(incoming_text)
+
 file.close
 
 capitalized_text = incoming_text.upcase
