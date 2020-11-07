@@ -44,28 +44,33 @@ class BrailleWriter
     end
   end
 
-  def translate_text(text)
+  def group_by_line(text)
     braille_text = translate(text)
-    hold = braille_text.each_slice(40).to_a
+    braille_text.each_slice(40).to_a
+  end
+
+  def translate_text(text)
+    lines = group_by_line(text)
     collector = []
-    hold2 = hold.each do |row|
+    lines.each do |line|
       top_line = ""
       middle_line = ""
       bottom_line = ""
-      row.map do |letter|
+      line.map do |letter|
         top_line += letter[0]
         middle_line += letter[1]
         bottom_line += letter[2]
       end
       collector << top_line + "\n" + middle_line + "\n" + bottom_line
     end
-    # require 'pry'; binding.pry
+    line_joiner(collector)
+  end
+  
+  def line_joiner(collector)
     string = ""
     collector.each do |row|
       string += "#{row}\n"
     end
-    # "#{hold2[0]}\n#{hold2[0]}\n#{hold2[0]}\n"
-# require 'pry'; binding.pry
     string
   end
 end
