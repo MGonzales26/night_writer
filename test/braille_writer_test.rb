@@ -6,20 +6,13 @@ class BrailleWriterTest < Minitest::Test
     text = './data/test_input.txt'
 
     file = File.open(text, "r")
-
     incoming_text = file.read
 
-    @document = BrailleWriter.new(incoming_text)
+    @document = BrailleWriter.new
   end
 
   def test_it_exists
     assert_instance_of BrailleWriter, @document
-  end
-
-  def test_it_has_attributes
-    expected = "This is a test sentence.\nThis is also a test sentence."
-
-    assert_equal expected, @document.text
   end
   
   def test_braille_letter_a
