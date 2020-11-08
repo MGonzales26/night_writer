@@ -63,4 +63,16 @@ class BrailleReaderTest < Minitest::Test
 
     assert_equal "ello", @document.braille_to_english(text)
   end
+
+  def test_it_can_zip_lines
+    lines = [["0.", "0.", "0.", "0."], 
+             [".0", "0.", "0.", ".0"], 
+             ["..", "0.", "0.", "0."]]
+
+    expected = [[["0.", "0.", "0.", "0."], 
+                [".0", "0.", "0.", ".0"], 
+                ["..", "0.", "0.", "0."]]]
+
+    assert_equal expected, @document.zip_lines(lines)
+  end
 end

@@ -27,10 +27,32 @@ class BrailleReader < Alphabet
     end.join
   end
 
+  def zip_lines(lines)
+    grouped_lines = lines.each_slice(3).to_a.transpose
+    grouped_lines[0].zip(grouped_lines[1], grouped_lines[2])
+  end
+
+  def group_braille_letters(zipped_lines)
+    braille_text = []
+    zipped_lines.map do |group|
+      braille_text <<(group[0].zip(group[1], group[2]))
+    end
+    braille_text
+  end
+  
+  def translate_braille(braille_text)
+    all_letters = []
+    braille_text.each do |line|
+      all_letters << braille_to_english(line)
+    end
+    all_letters.join
+  end
+
   def translate_text(text)
     rows = split_rows(text)
     lines = seperate_letters(rows)
-    braille_text = lines[0].zip(lines[1], lines[2])
-    braille_to_english(braille_text)
+    zipped_lines = zip_lines(lines)
+    braille_text = group_braille_letters(zipped_lines)
+    translate_braille(braille_text)
   end
 end
