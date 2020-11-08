@@ -1,10 +1,8 @@
 require './lib/alphabet'
 
 class BrailleWriter < Alphabet
-  attr_reader :text
 
-  def initialize(text)
-    @text = text
+  def initialize
     @braille_alphabet = braille_alphabet
   end
 
