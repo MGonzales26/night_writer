@@ -75,4 +75,26 @@ class BrailleReaderTest < Minitest::Test
 
     assert_equal expected, @document.zip_lines(lines)
   end
+
+  def test_it_can_group_braille_letters
+    zipped_lines = [[["0.", "0.", "0.", "0."], 
+                     [".0", "0.", "0.", ".0"], 
+                     ["..", "0.", "0.", "0."]]]
+
+    expected = [[["0.", ".0", ".."], 
+                 ["0.", "0.", "0."], 
+                 ["0.", "0.", "0."], 
+                 ["0.", ".0", "0."]]]
+
+    assert_equal expected, @document.group_braille_letters(zipped_lines)
+  end
+
+  def test_it_can_translate_braille
+    braille_letters = [[["0.", ".0", ".."], 
+                 ["0.", "0.", "0."], 
+                 ["0.", "0.", "0."], 
+                 ["0.", ".0", "0."]]]
+
+    assert_equal "ello", @document.translate_braille(braille_letters)
+  end
 end
