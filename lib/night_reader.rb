@@ -4,7 +4,7 @@ file = File.open(ARGV[0], "r")
 
 incoming_text = file.read
 
-document = BrailleReader.new(incoming_text)
+document = BrailleReader.new
 
 english_text = document.translate_text(incoming_text)
 
@@ -16,5 +16,5 @@ writer.write(english_text)
 
 writer.close
 
-puts "Created '#{ARGV[1]}' containing #{incoming_text.size} charaters'"
+puts "Created '#{ARGV[1]}' containing #{(incoming_text.size / 6)} charaters'"
 
