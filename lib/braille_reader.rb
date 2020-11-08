@@ -40,9 +40,9 @@ class BrailleReader < Alphabet
     braille_text
   end
   
-  def translate_braille(braille_text)
+  def translate_braille(braille_letters)
     all_letters = []
-    braille_text.each do |line|
+    braille_letters.each do |line|
       all_letters << braille_to_english(line)
     end
     all_letters.join
@@ -52,7 +52,7 @@ class BrailleReader < Alphabet
     rows = split_rows(text)
     lines = seperate_letters(rows)
     zipped_lines = zip_lines(lines)
-    braille_text = group_braille_letters(zipped_lines)
-    translate_braille(braille_text)
+    braille_letters = group_braille_letters(zipped_lines)
+    translate_braille(braille_letters)
   end
 end
