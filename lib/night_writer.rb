@@ -10,7 +10,6 @@ braille_text = document.translate_text(incoming_text)
 
 file.close
 
-# require 'pry'; binding.pry
 writer = File.open(ARGV[1], "w")
 
 writer.write(braille_text)
