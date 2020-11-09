@@ -41,7 +41,6 @@ class BrailleWriter < Alphabet
     end
     line_joiner(collector)
   end
-  # require 'pry'; binding.pry
   
   def line_joiner(collector)
     string = ""
