@@ -3,11 +3,6 @@ require './test/test_helper'
 class BrailleWriterTest < Minitest::Test
 
   def setup
-    text = './data/test_input.txt'
-
-    file = File.open(text, "r")
-    incoming_text = file.read
-
     @document = BrailleWriter.new
   end
 
@@ -22,9 +17,9 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_it_can_translate
-    expected = ["0.", "..", ".."]
+    expected = [["0.", "..", ".."]]
 
-    assert_equal = @document.translate("a")
+    assert_equal expected, @document.translate("a")
   end
 
   def test_it_can_translate_text_small
