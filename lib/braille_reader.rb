@@ -7,10 +7,6 @@ class BrailleReader < Alphabet
     @alphabet = braille_alphabet.invert
   end
   
-  def translate(text)
-    alphabet[text.split("\n")]
-  end
-  
   def split_rows(text)
     text.split("\n")
   end
@@ -41,13 +37,12 @@ class BrailleReader < Alphabet
   end
   
   def translate_braille(braille_letters)
-    letters = []
     all_letters = []
     dual_character = []
     braille_letters.each do |line|
       line.each do |letter|
         if dual_character == []
-          if letter == [".0", ".0", "00"]
+          if (letter == [".0", ".0", "00"]) || (letter == ["..", "..", ".0"])
             dual_character << letter
           else 
             all_letters << letter
@@ -59,8 +54,7 @@ class BrailleReader < Alphabet
         end
       end
     end
-    letters << braille_to_english(all_letters)
-    letters.join
+    braille_to_english(all_letters)
   end
   
   def translate_text(text)

@@ -58,4 +58,25 @@ class BrailleWriterTest < Minitest::Test
 
     assert_equal expected, @document.translate_text(text)
   end
+
+  def test_it_can_group_by_lines
+    text = "Group."
+
+    expected = [[[["..", "..", ".0"], ["00", "00", ".."]], 
+                  ["0.", "00", "0."], 
+                  ["0.", ".0", "0."], 
+                  ["0.", "..", "00"], 
+                  ["00", "0.", "0."], 
+                  ["..", "00", ".0"]]]
+
+    assert_equal expected, @document.group_by_line(text)
+  end
+
+  def test_line_joiner
+    formated_lines = ["0..0\n..00\n..0."]
+
+    expected = "0..0\n..00\n..0.\n"
+
+    assert_equal expected, @document.line_joiner(formated_lines)
+  end
 end

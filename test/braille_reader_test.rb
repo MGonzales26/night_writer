@@ -19,10 +19,6 @@ class BrailleReaderTest < Minitest::Test
     assert_equal "a", @document.alphabet[["0.", "..", ".."]]
   end
 
-  def test_it_can_translate_a_letter
-    assert_equal "t", @document.translate(@incoming_text)
-  end
-
   def test_it_can_translate_a_sentence
     text = './data/braille_test_sentence.txt'
     file = File.open(text, "r")
@@ -104,5 +100,13 @@ class BrailleReaderTest < Minitest::Test
     incoming_text = file.read
 
     assert_equal "26", @document.translate_text(incoming_text)
+  end
+
+  def test_it_can_return_uppercase
+    text = './data/upper_case.txt'
+    file = File.open(text, "r")
+    incoming_text = file.read
+
+    assert_equal "Hello World", @document.translate_text(incoming_text)
   end
 end

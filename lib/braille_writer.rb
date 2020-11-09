@@ -19,7 +19,7 @@ class BrailleWriter < Alphabet
 
   def translate_text(text)
     lines = group_by_line(text)
-    collector = []
+    formated_lines = []
     lines.each do |line|
       top_line = ""
       middle_line = ""
@@ -37,14 +37,14 @@ class BrailleWriter < Alphabet
           end
         end
       end
-      collector << top_line + "\n" + middle_line + "\n" + bottom_line
+      formated_lines << top_line + "\n" + middle_line + "\n" + bottom_line
     end
-    line_joiner(collector)
+    line_joiner(formated_lines)
   end
   
-  def line_joiner(collector)
+  def line_joiner(formated_lines)
     string = ""
-    collector.each do |row|
+    formated_lines.each do |row|
       string += "#{row}\n"
     end
     string
