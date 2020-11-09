@@ -7,7 +7,6 @@ class BrailleWriter < Alphabet
   end
 
   def translate(text)
-#possibly an each_char
     text.chars.map do |letter|
       @braille_alphabet[letter]
     end
@@ -32,7 +31,6 @@ class BrailleWriter < Alphabet
       end
       collector << top_line + "\n" + middle_line + "\n" + bottom_line
     end
-    # require 'pry'; binding.pry
     line_joiner(collector)
   end
   
