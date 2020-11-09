@@ -3,11 +3,6 @@ require './test/test_helper'
 class BrailleReaderTest < Minitest::Test
 
   def setup
-    text = './data/test_output.txt'
-
-    file = File.open(text, "r")
-    @incoming_text = file.read
-
     @document = BrailleReader.new
   end
 
@@ -17,10 +12,6 @@ class BrailleReaderTest < Minitest::Test
 
   def test_it_has_inverted_alphabet
     assert_equal "a", @document.alphabet[["0.", "..", ".."]]
-  end
-
-  def test_it_can_translate_a_letter
-    assert_equal "t", @document.translate(@incoming_text)
   end
 
   def test_it_can_translate_a_sentence
@@ -104,5 +95,13 @@ class BrailleReaderTest < Minitest::Test
     incoming_text = file.read
 
     assert_equal "26", @document.translate_text(incoming_text)
+  end
+
+  def test_it_can_return_uppercase
+    text = './data/upper_case.txt'
+    file = File.open(text, "r")
+    incoming_text = file.read
+
+    assert_equal "Hello World", @document.translate_text(incoming_text)
   end
 end

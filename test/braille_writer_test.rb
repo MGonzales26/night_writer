@@ -3,11 +3,6 @@ require './test/test_helper'
 class BrailleWriterTest < Minitest::Test
 
   def setup
-    text = './data/test_input.txt'
-
-    file = File.open(text, "r")
-    incoming_text = file.read
-
     @document = BrailleWriter.new
   end
 
@@ -22,9 +17,9 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_it_can_translate
-    expected = ["0.", "..", ".."]
+    expected = [["0.", "..", ".."]]
 
-    assert_equal = @document.translate("a")
+    assert_equal expected, @document.translate("a")
   end
 
   def test_it_can_translate_text_small
@@ -57,5 +52,26 @@ class BrailleWriterTest < Minitest::Test
     expected = "0..00..000\n...00..00.\n..00..00..\n"
 
     assert_equal expected, @document.translate_text(text)
+  end
+
+  def test_it_can_group_by_lines
+    text = "Group."
+
+    expected = [[[["..", "..", ".0"], ["00", "00", ".."]], 
+                  ["0.", "00", "0."], 
+                  ["0.", ".0", "0."], 
+                  ["0.", "..", "00"], 
+                  ["00", "0.", "0."], 
+                  ["..", "00", ".0"]]]
+
+    assert_equal expected, @document.group_by_line(text)
+  end
+
+  def test_line_joiner
+    formated_lines = ["0..0\n..00\n..0."]
+
+    expected = "0..0\n..00\n..0.\n"
+
+    assert_equal expected, @document.line_joiner(formated_lines)
   end
 end
