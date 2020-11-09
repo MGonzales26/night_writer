@@ -50,4 +50,12 @@ class BrailleWriterTest < Minitest::Test
 
     assert_equal expected, @document.translate_text(text)
   end
+
+  def test_it_can_translate_numbers
+    text = "a26"
+    
+    expected = "0..00..000\n...00..00.\n..00..00..\n"
+
+    assert_equal expected, @document.translate_text(text)
+  end
 end

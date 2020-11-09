@@ -91,10 +91,18 @@ class BrailleReaderTest < Minitest::Test
 
   def test_it_can_translate_braille
     braille_letters = [[["0.", ".0", ".."], 
-                 ["0.", "0.", "0."], 
-                 ["0.", "0.", "0."], 
-                 ["0.", ".0", "0."]]]
+                        ["0.", "0.", "0."], 
+                        ["0.", "0.", "0."], 
+                        ["0.", ".0", "0."]]]
 
     assert_equal "ello", @document.translate_braille(braille_letters)
+  end
+
+  def test_it_can_translate_numbers
+    text = './data/braille_number.txt'
+    file = File.open(text, "r")
+    incoming_text = file.read
+
+    assert_equal "26", @document.translate_text(incoming_text)
   end
 end
