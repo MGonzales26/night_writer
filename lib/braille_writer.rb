@@ -25,14 +25,23 @@ class BrailleWriter < Alphabet
       middle_line = ""
       bottom_line = ""
       line.map do |letter|
-        top_line += letter[0]
-        middle_line += letter[1]
-        bottom_line += letter[2]
+        if letter.count == 3
+          top_line += letter[0]
+          middle_line += letter[1]
+          bottom_line += letter[2]
+        elsif letter.count == 2
+          letter.map do |letter|
+            top_line += letter[0]
+            middle_line += letter[1]
+            bottom_line += letter[2]
+          end
+        end
       end
       collector << top_line + "\n" + middle_line + "\n" + bottom_line
     end
     line_joiner(collector)
   end
+  # require 'pry'; binding.pry
   
   def line_joiner(collector)
     string = ""

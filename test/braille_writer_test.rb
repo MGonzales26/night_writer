@@ -28,6 +28,7 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_it_can_translate_text_small
+    skip
     text = "at"
 
     expected = "0..0\n..00\n..0.\n"
@@ -36,6 +37,7 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_it_can_translate_text_large
+    skip
     text = "hello world"
 
     expected = "0.0.0.0.0....00.0.0.00\n00.00.0..0..00.0000..0\n....0.0.0....00.0.0...\n"
@@ -44,10 +46,19 @@ class BrailleWriterTest < Minitest::Test
   end
 
   def test_braille_letters_on_same_row
+    skip
     text = "at"
 
     expected = "0..0\n..00\n..0.\n"
 
+    assert_equal expected, @document.translate_text(text)
+  end
+
+  def test_it_can_translate_numbers
+    text = "a26"
+    
+    expected = "0..00..000\n...00..00.\n..00..00..\n"
+    
     assert_equal expected, @document.translate_text(text)
   end
 end
