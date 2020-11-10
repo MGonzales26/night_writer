@@ -16,5 +16,5 @@ writer.write(english_text)
 
 writer.close
 
-puts "Created '#{ARGV[1]}' containing #{(incoming_text.size / 6)} charaters'"
+puts "Created '#{ARGV[1]}' containing #{(english_text.size)} charaters'"
 
