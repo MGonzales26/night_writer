@@ -1,20 +1,25 @@
-require './lib/braille_reader'
+require './lib/file_read_write'
 
-file = File.open(ARGV[0], "r")
+# require 'pry'; binding.pry
+file = FileReadWrite.new(ARGV[0], ARGV[1])
 
-incoming_text = file.read
+file.translate_to_english
 
-document = BrailleReader.new
+# file = File.open(ARGV[0], "r")
 
-english_text = document.translate_text(incoming_text)
+# incoming_text = file.read
 
-file.close
+# document = BrailleReader.new
 
-writer = File.open(ARGV[1], "w")
+# english_text = document.translate_text(incoming_text)
 
-writer.write(english_text)
+# file.close
 
-writer.close
+# writer = File.open(ARGV[1], "w")
 
-puts "Created '#{ARGV[1]}' containing #{(incoming_text.size / 6)} charaters'"
+# writer.write(english_text)
+
+# writer.close
+
+# puts "Created '#{ARGV[1]}' containing #{(incoming_text.size / 6)} charaters'"
 
